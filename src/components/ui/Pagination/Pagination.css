@@ -1,0 +1,88 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl) 0;
+  flex-wrap: wrap;
+}
+
+.pagination__btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.8rem 1.6rem;
+  background-color: var(--color-card-bg);
+  color: var(--color-text);
+  border-radius: var(--radius-md);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  min-height: 4.4rem;
+  border: 1px solid var(--color-border);
+}
+
+.pagination__btn:hover:not(:disabled) {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-accent-gold);
+  color: var(--color-accent-gold);
+}
+
+.pagination__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pagination__btn:focus-visible {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+.pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pagination__page {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-card-bg);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-md);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  border: 1px solid var(--color-border);
+}
+
+.pagination__page:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+.pagination__page--active {
+  background-color: var(--color-accent-gold);
+  color: #000;
+  font-weight: 600;
+  border-color: var(--color-accent-gold);
+}
+
+.pagination__page--active:hover {
+  background-color: var(--color-accent-gold-light);
+  color: #000;
+}
+
+.pagination__page:focus-visible {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+.pagination__ellipsis {
+  color: var(--color-text-muted);
+  padding: 0 var(--space-xs);
+  font-size: 1.4rem;
+}

@@ -1,0 +1,8 @@
+.home {
+  min-height: 100vh;
+}
+
+.home__sections {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-2xl);
+}

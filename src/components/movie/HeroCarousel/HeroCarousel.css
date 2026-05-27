@@ -1,0 +1,331 @@
+/* ── Carousel container ── */
+.hero-carousel {
+  position: relative;
+  min-height: 62vh;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+@media (max-width: 768px) {
+  .hero-carousel {
+    min-height: 52vh;
+  }
+}
+
+/* ── Track (stacking context for slides) ── */
+.hero-carousel__track {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Individual Slide ── */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 700ms ease;
+  will-change: opacity;
+}
+
+.hero-slide--active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.hero-slide--prev {
+  opacity: 0;
+  z-index: 1;
+}
+
+/* Backdrop image */
+.hero-slide__backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  transform: scale(1.04);
+  transition: transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.hero-slide--active .hero-slide__backdrop {
+  transform: scale(1);
+}
+
+/* Subtle Ken Burns on active slide */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-slide--active .hero-slide__backdrop {
+    animation: kenburns 8s ease forwards;
+  }
+}
+
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+
+/* Gradient overlay */
+.hero-slide__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 15, 35, 0.15) 0%,
+    rgba(15, 15, 35, 0.35) 35%,
+    rgba(15, 15, 35, 0.88) 75%,
+    var(--color-bg) 100%
+  );
+}
+
+/* Content */
+.hero-slide__content {
+  position: relative;
+  z-index: 1;
+  padding-bottom: var(--space-xl);
+  padding-top: var(--space-xl);
+  max-width: 70rem;
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 200ms,
+              opacity 600ms ease 200ms;
+}
+
+.hero-slide--active .hero-slide__content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide__content {
+    transform: none;
+    transition: opacity 300ms ease;
+  }
+}
+
+.hero-slide__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1.2rem;
+  background-color: var(--color-accent-gold);
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-md);
+}
+
+.hero-slide__title {
+  font-size: clamp(3.2rem, 6vw, 6rem);
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+}
+
+.hero-slide__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.hero-slide__year {
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.hero-slide__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.5rem;
+  color: var(--color-accent-gold);
+  font-weight: 600;
+}
+
+.hero-slide__overview {
+  font-size: 1.6rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-xl);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 55rem;
+}
+
+.hero-slide__actions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.hero-slide__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 1.2rem 2.4rem;
+  background-color: var(--color-accent-gold);
+  color: #000;
+  border-radius: var(--radius-md);
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  min-height: 4.8rem;
+}
+
+.hero-slide__btn:hover {
+  background-color: var(--color-accent-gold-light);
+  transform: translateY(-1px);
+}
+
+.hero-slide__btn:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ── Progress bar ── */
+.hero-carousel__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.12);
+  z-index: 10;
+}
+
+.hero-carousel__progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-gold-light));
+  transform-origin: left center;
+  animation: progress-fill linear forwards;
+  width: 100%;
+  transform: scaleX(0);
+}
+
+.hero-carousel__progress-bar--paused {
+  animation-play-state: paused;
+}
+
+@keyframes progress-fill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ── Arrow buttons ── */
+.hero-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(15, 15, 35, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  opacity: 0;
+  transition: opacity var(--transition-normal), background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero-carousel:hover .hero-carousel__arrow,
+.hero-carousel:focus-within .hero-carousel__arrow {
+  opacity: 1;
+}
+
+.hero-carousel__arrow:hover {
+  background-color: rgba(202, 138, 4, 0.3);
+  border-color: var(--color-accent-gold);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.hero-carousel__arrow:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+.hero-carousel__arrow--prev {
+  left: var(--space-lg);
+}
+
+.hero-carousel__arrow--next {
+  right: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+  .hero-carousel__arrow--prev { left: var(--space-sm); }
+  .hero-carousel__arrow--next { right: var(--space-sm); }
+  .hero-carousel__arrow {
+    width: 4rem;
+    height: 4rem;
+    opacity: 1;
+  }
+}
+
+/* ── Dot indicators ── */
+.hero-carousel__dots {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.hero-carousel__dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), width var(--transition-normal), border-radius var(--transition-normal), border-color var(--transition-fast);
+  padding: 0;
+  min-height: unset;
+}
+
+.hero-carousel__dot--active {
+  width: 2.4rem;
+  border-radius: 0.4rem;
+  background-color: var(--color-accent-gold);
+  border-color: var(--color-accent-gold);
+}
+
+.hero-carousel__dot:hover:not(.hero-carousel__dot--active) {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-carousel__dot:focus-visible {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .hero-slide__title {
+    font-size: 2.8rem;
+  }
+
+  .hero-slide__overview {
+    -webkit-line-clamp: 2;
+  }
+}

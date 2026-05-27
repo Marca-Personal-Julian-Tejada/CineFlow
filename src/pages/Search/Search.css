@@ -1,0 +1,21 @@
+.search-page {
+  padding: var(--space-xl) 0 var(--space-2xl);
+}
+
+.search-page__header {
+  margin-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.search-page__title {
+  font-size: 2.8rem;
+  color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .search-page__title {
+    font-size: 3.6rem;
+  }
+}

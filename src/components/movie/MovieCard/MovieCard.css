@@ -1,0 +1,158 @@
+.movie-card {
+  position: relative;
+}
+
+.movie-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.movie-card__poster-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 2 / 3;
+  background-color: var(--color-card-bg);
+}
+
+.movie-card__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.movie-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 15, 35, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.movie-card__overlay-text {
+  color: var(--color-text);
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border: 2px solid var(--color-accent-gold);
+  border-radius: var(--radius-md);
+  color: var(--color-accent-gold);
+}
+
+.movie-card__link:hover .movie-card__poster {
+  transform: scale(1.05);
+}
+
+.movie-card__link:hover .movie-card__overlay {
+  opacity: 1;
+}
+
+.movie-card__link:focus-visible .movie-card__poster-wrapper {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+.movie-card__info {
+  padding: var(--space-sm) var(--space-xs) 0;
+}
+
+.movie-card__title {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: var(--space-xs);
+}
+
+.movie-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+}
+
+.movie-card__year {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
+
+.movie-card__stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star {
+  color: var(--color-bg-secondary);
+}
+
+.star--filled {
+  color: var(--color-accent-gold);
+}
+
+.movie-card__rating-value {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  margin-left: 0.4rem;
+}
+
+/* ── Badges de estado en el poster ── */
+.movie-card__badges {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.movie-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem 0.3rem 0.6rem;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  line-height: 1;
+  text-transform: uppercase;
+  /* entrada suave */
+  animation: badge-in 200ms ease both;
+}
+
+@keyframes badge-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.movie-card__badge--watched {
+  background-color: rgba(22, 163, 74, 0.82);   /* verde */
+  color: #fff;
+  border: 1px solid rgba(134, 239, 172, 0.5);
+}
+
+.movie-card__badge--favorite {
+  background-color: rgba(225, 29, 72, 0.82);   /* rojo */
+  color: #fff;
+  border: 1px solid rgba(252, 165, 165, 0.5);
+}
+
+.movie-card__badge--pending {
+  background-color: rgba(202, 138, 4, 0.88);   /* dorado */
+  color: #000;
+  border: 1px solid rgba(253, 224, 71, 0.5);
+}

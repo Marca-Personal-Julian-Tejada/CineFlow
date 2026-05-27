@@ -1,0 +1,126 @@
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding: var(--space-md) 0;
+}
+
+.filter-bar__label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 2.4rem;
+  color: var(--color-text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  min-height: 4rem;
+}
+
+.filter-pill:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--color-text);
+}
+
+.filter-pill--active {
+  background-color: rgba(202, 138, 4, 0.15);
+  border-color: var(--color-accent-gold);
+  color: var(--color-accent-gold);
+}
+
+.filter-pill:focus-visible {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
+.filter-dropdown__list {
+  position: absolute;
+  top: calc(100% + 0.8rem);
+  left: 0;
+  z-index: 50;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) 0;
+  min-width: 18rem;
+  max-height: 28rem;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.filter-dropdown__list--year {
+  max-height: 24rem;
+}
+
+.filter-dropdown__list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.filter-dropdown__list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-dropdown__list::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 2px;
+}
+
+.filter-dropdown__option {
+  width: 100%;
+  text-align: left;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  min-height: 4rem;
+}
+
+.filter-dropdown__option:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+}
+
+.filter-dropdown__option--selected {
+  color: var(--color-accent-gold);
+  background-color: rgba(202, 138, 4, 0.1);
+}
+
+.filter-clear {
+  padding: 0.8rem 1.4rem;
+  font-size: 1.3rem;
+  color: var(--color-accent-red);
+  cursor: pointer;
+  border-radius: 2.4rem;
+  border: 1px solid rgba(225, 29, 72, 0.4);
+  transition: all var(--transition-fast);
+  min-height: 4rem;
+}
+
+.filter-clear:hover {
+  background-color: rgba(225, 29, 72, 0.1);
+  border-color: var(--color-accent-red);
+}
+
+.filter-clear:focus-visible {
+  outline: 2px solid var(--color-accent-red);
+  outline-offset: 2px;
+}

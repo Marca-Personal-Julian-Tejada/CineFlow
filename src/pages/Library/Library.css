@@ -1,0 +1,50 @@
+.library-page {
+  padding: var(--space-xl) 0 var(--space-2xl);
+}
+
+.library-page__header {
+  margin-bottom: var(--space-xl);
+}
+
+.library-page__greeting {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--color-accent-gold);
+}
+
+.library-page__title {
+  font-size: 3.2rem;
+  color: var(--color-text);
+}
+
+.library-page__subtitle {
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+  margin-top: 0.4rem;
+}
+
+.library-empty-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 1.2rem 2.4rem;
+  background-color: var(--color-accent-gold);
+  color: #000;
+  border-radius: var(--radius-md);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  min-height: 4.8rem;
+}
+
+.library-empty-btn:hover {
+  background-color: var(--color-accent-gold-light);
+}
+
+.library-empty-btn:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}

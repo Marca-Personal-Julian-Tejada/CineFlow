@@ -1,0 +1,48 @@
+:root {
+  /* Colores principales */
+  --color-bg: #0F0F23;
+  --color-bg-secondary: #1E1B4B;
+  --color-card-bg: #16162A;
+  --color-accent-gold: #CA8A04;
+  --color-accent-gold-light: #F0A500;
+  --color-accent-red: #E11D48;
+  --color-accent-red-dark: #BE1235;
+  --color-text: #F8FAFC;
+  --color-text-muted: #A0A0B0;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-overlay: rgba(15, 15, 35, 0.85);
+
+  /* Tipografía */
+  --font-heading: 'Righteous', cursive;
+  --font-body: 'Poppins', sans-serif;
+
+  /* Espaciados */
+  --space-xs: 0.4rem;
+  --space-sm: 0.8rem;
+  --space-md: 1.6rem;
+  --space-lg: 2.4rem;
+  --space-xl: 4.0rem;
+  --space-2xl: 6.4rem;
+
+  /* Radios */
+  --radius-sm: 0.4rem;
+  --radius-md: 0.8rem;
+  --radius-lg: 1.6rem;
+  --radius-xl: 2.4rem;
+
+  /* Sombras */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 8px 32px rgba(202, 138, 4, 0.3);
+
+  /* Transiciones */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+
+  /* Z-index */
+  --z-navbar: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+
+  /* Navbar height */
+  --navbar-height: 6.4rem;
+}
