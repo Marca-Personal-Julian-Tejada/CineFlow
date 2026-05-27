@@ -1,8 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import useFetch from '@/hooks/useFetch';
-import { getPopularTV, getTVGenres, discoverTV } from '@/services/tmdb';
-import SeriesHeroSection from '@/components/series/SeriesHeroSection/SeriesHeroSection';
+import { getPopularTV, getTVGenres, discoverTV, searchTV } from '@/services/tmdb';
+import SeriesHeroCarousel from '@/components/series/SeriesHeroCarousel/SeriesHeroCarousel';
+import SeriesSearchBar from '@/components/search/SeriesSearchBar/SeriesSearchBar';
 import SeriesFilterBar from '@/components/series/SeriesFilterBar/SeriesFilterBar';
 import SeriesCard from '@/components/series/SeriesCard/SeriesCard';
 import Skeleton from '@/components/ui/Skeleton/Skeleton';
@@ -18,6 +19,7 @@ const Series = () => {
   const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page')) || 1);
   const [totalPages, setTotalPages] = useState(0);
 
+  const query = searchParams.get('q');
   const genreId = searchParams.get('genero');
   const year = searchParams.get('year');
   const rating = searchParams.get('rating');
@@ -35,7 +37,10 @@ const Series = () => {
     []
   );
 
-  const heroSeries = heroData?.results?.[0];
+  const heroSeries = useMemo(() => {
+    const allSeries = heroData?.results || [];
+    return allSeries.filter((s) => s.backdrop_path).slice(0, 8);
+  }, [heroData]);
 
   useEffect(() => {
     const fetchSeries = async () => {
@@ -43,15 +48,22 @@ const Series = () => {
       setError(null);
       try {
         const controller = new AbortController();
-        const filters = {
-          genreId: genreId ? parseInt(genreId) : null,
-          year: year ? parseInt(year) : null,
-          ratingGte: rating ? parseFloat(rating) : null,
-          providers,
-          region,
-          page: currentPage,
-        };
-        const data = await discoverTV(filters, controller.signal);
+        let data;
+
+        if (query) {
+          data = await searchTV({ query, page: currentPage }, controller.signal);
+        } else {
+          const filters = {
+            genreId: genreId ? parseInt(genreId) : null,
+            year: year ? parseInt(year) : null,
+            ratingGte: rating ? parseFloat(rating) : null,
+            providers,
+            region,
+            page: currentPage,
+          };
+          data = await discoverTV(filters, controller.signal);
+        }
+
         setSeries(data.results || []);
         setTotalPages(data.total_pages || 0);
       } catch (err) {
@@ -64,7 +76,7 @@ const Series = () => {
     };
 
     fetchSeries();
-  }, [genreId, year, rating, providers, region, currentPage, sortBy]);
+  }, [query, genreId, year, rating, providers, region, currentPage, sortBy]);
 
   const handleFilterChange = (newFilters) => {
     const params = new URLSearchParams(searchParams);
@@ -87,7 +99,8 @@ const Series = () => {
 
   return (
     <div className="series-page">
-      {heroSeries && <SeriesHeroSection series={heroSeries} />}
+      {heroSeries.length > 0 && <SeriesHeroCarousel series={heroSeries} />}
+      <SeriesSearchBar />
 
       <div className="series-page__content container">
         <SeriesFilterBar
