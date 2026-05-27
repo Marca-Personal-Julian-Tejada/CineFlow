@@ -22,6 +22,8 @@ const Series = () => {
   const year = searchParams.get('year');
   const rating = searchParams.get('rating');
   const sortBy = searchParams.get('sort') || 'popularity.desc';
+  const providers = searchParams.get('with_watch_providers');
+  const region = searchParams.get('watch_region') || 'CO';
 
   const { data: genresData } = useFetch(
     (signal) => getTVGenres(signal),
@@ -45,6 +47,8 @@ const Series = () => {
           genreId: genreId ? parseInt(genreId) : null,
           year: year ? parseInt(year) : null,
           ratingGte: rating ? parseFloat(rating) : null,
+          providers,
+          region,
           page: currentPage,
         };
         const data = await discoverTV(filters, controller.signal);
@@ -60,7 +64,7 @@ const Series = () => {
     };
 
     fetchSeries();
-  }, [genreId, year, rating, currentPage, sortBy]);
+  }, [genreId, year, rating, providers, region, currentPage, sortBy]);
 
   const handleFilterChange = (newFilters) => {
     const params = new URLSearchParams(searchParams);
@@ -91,6 +95,8 @@ const Series = () => {
           genres={genresData?.genres || []}
           selectedGenres={genreId ? [parseInt(genreId)] : []}
           selectedSort={sortBy}
+          selectedProviders={providers ? providers.split('|').map(Number) : []}
+          selectedCountry={region}
         />
 
         {error && (

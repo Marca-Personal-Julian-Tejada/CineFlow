@@ -31,4 +31,6 @@ export const ENDPOINTS = {
   SEARCH_TV: '/search/tv',
   TV_DETAIL: (id) => `/tv/${id}`,
   TV_GENRES: '/genre/tv/list',
+  TV_WATCH_PROVIDERS: (id) => `/tv/${id}/watch/providers`,
+  WATCH_PROVIDERS: '/watch/providers/tv',
 };

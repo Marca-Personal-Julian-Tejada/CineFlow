@@ -75,11 +75,12 @@ export const getBackdropUrl = (backdropPath, size = 'large') =>
 export const getPopularTV = (page = 1, signal) =>
   apiFetch(ENDPOINTS.POPULAR_TV, { page, region: 'CO' }, signal);
 
-export const discoverTV = ({ genreId, year, ratingGte, page = 1 }, signal) => {
-  const params = { page };
+export const discoverTV = ({ genreId, year, ratingGte, providers, region, page = 1 }, signal) => {
+  const params = { page, watch_region: region || 'CO' };
   if (genreId) params['with_genres'] = genreId;
   if (year) params['first_air_date_year'] = year;
   if (ratingGte) params['vote_average.gte'] = ratingGte;
+  if (providers) params['with_watch_providers'] = providers;
   return apiFetch(ENDPOINTS.DISCOVER_TV, params, signal);
 };
 
@@ -91,3 +92,6 @@ export const getTVDetail = (id, signal) =>
 
 export const getTVGenres = (signal) =>
   apiFetch(ENDPOINTS.TV_GENRES, {}, signal);
+
+export const getTVWatchProviders = (signal) =>
+  apiFetch(ENDPOINTS.WATCH_PROVIDERS, {}, signal);
