@@ -70,3 +70,24 @@ export const getPosterUrl = (posterPath, size = 'large') =>
 
 export const getBackdropUrl = (backdropPath, size = 'large') =>
   backdropPath ? `${IMAGE_BASE_URL}/${BACKDROP_SIZES[size]}${backdropPath}` : null;
+
+// TV Series
+export const getPopularTV = (page = 1, signal) =>
+  apiFetch(ENDPOINTS.POPULAR_TV, { page, region: 'CO' }, signal);
+
+export const discoverTV = ({ genreId, year, ratingGte, page = 1 }, signal) => {
+  const params = { page };
+  if (genreId) params['with_genres'] = genreId;
+  if (year) params['first_air_date_year'] = year;
+  if (ratingGte) params['vote_average.gte'] = ratingGte;
+  return apiFetch(ENDPOINTS.DISCOVER_TV, params, signal);
+};
+
+export const searchTV = ({ query, page = 1 }, signal) =>
+  apiFetch(ENDPOINTS.SEARCH_TV, { query, page }, signal);
+
+export const getTVDetail = (id, signal) =>
+  apiFetch(ENDPOINTS.TV_DETAIL(id), { append_to_response: 'credits,videos' }, signal);
+
+export const getTVGenres = (signal) =>
+  apiFetch(ENDPOINTS.TV_GENRES, {}, signal);

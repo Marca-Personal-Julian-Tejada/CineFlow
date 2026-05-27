@@ -25,4 +25,10 @@ export const ENDPOINTS = {
   POPULAR_PEOPLE: '/person/popular',
   SEARCH_PEOPLE: '/search/person',
   PERSON_DETAIL: (id) => `/person/${id}`,
+  // TV Series endpoints
+  POPULAR_TV: '/tv/popular',
+  DISCOVER_TV: '/discover/tv',
+  SEARCH_TV: '/search/tv',
+  TV_DETAIL: (id) => `/tv/${id}`,
+  TV_GENRES: '/genre/tv/list',
 };

@@ -10,6 +10,8 @@ import MovieDetail from '@/pages/MovieDetail/MovieDetail';
 import Library from '@/pages/Library/Library';
 import Actors from '@/pages/Actors/Actors';
 import ActorDetail from '@/pages/ActorDetail/ActorDetail';
+import Series from '@/pages/Series/Series';
+import SeriesDetail from '@/pages/SeriesDetail/SeriesDetail';
 import './App.css';
 
 const Layout = ({ children }) => (
@@ -23,6 +25,8 @@ const Layout = ({ children }) => (
 const router = createBrowserRouter([
   { path: '/', element: <Layout><Home /></Layout> },
   { path: '/buscar', element: <Layout><Search /></Layout> },
+  { path: '/series', element: <Layout><Series /></Layout> },
+  { path: '/serie/:id', element: <Layout><SeriesDetail /></Layout> },
   { path: '/generos', element: <Layout><Genres /></Layout> },
   { path: '/pelicula/:id', element: <Layout><MovieDetail /></Layout> },
   { path: '/mi-biblioteca', element: <Layout><Library /></Layout> },
