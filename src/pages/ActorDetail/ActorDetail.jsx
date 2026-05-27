@@ -148,7 +148,7 @@ const ActorDetail = () => {
       <div className="actor-detail__content container">
         {/* Breadcrumb */}
         <nav className="actor-detail__breadcrumb" aria-label="Migas de pan">
-          <Link to="/" className="breadcrumb__link">Inicio</Link>
+          <Link to="/" className="breadcrumb__link">Películas</Link>
           <span className="breadcrumb__sep" aria-hidden="true">/</span>
           <Link to="/actores" className="breadcrumb__link">Actores</Link>
           <span className="breadcrumb__sep" aria-hidden="true">/</span>

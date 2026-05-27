@@ -197,7 +197,7 @@ const MovieDetail = () => {
 
       <div className="detail-page__content container">
         <nav className="detail-page__breadcrumb" aria-label="Migas de pan">
-          <Link to="/" className="breadcrumb__link">Inicio</Link>
+          <Link to="/" className="breadcrumb__link">Películas</Link>
           <span className="breadcrumb__sep" aria-hidden="true">/</span>
           <span className="breadcrumb__current" aria-current="page">{title}</span>
         </nav>
